@@ -3,19 +3,22 @@
   (:gen-class))
 
 (defn -main []
-  (println "Enter a category:  Furniture, Alcohol, Toiletries, Shoes, Food, Jewelry")
-  (let [people (slurp "purchases.csv")
-        people (str/split-lines people)
-        people (map (fn [line] (str/split line #","))
-                 people)
-        header (first people)
-        people (rest people)
-        people (map (fn [line] (zipmap header line))
-                 people)
-        
+  (let [purchases (slurp "purchases.csv")
+        purchases (str/split-lines purchases)
+        purchases (map #(str/split % #",") purchases)
+        header (first purchases)
+        purchases (rest purchases)
+        purchases (map #(zipmap header %)
+                    purchases)
+        _ (println "Enter a category:  Furniture, Alcohol, Toiletries, Shoes, Food, Jewelry")
         
         input (read-line)
-        people (filter (fn [line] (= input (get line "category")))
-                       people)]
-    people))
+        purchases (filter #(= input (get % "category"))
+                       purchases)
+        text (pr-str purchases)]
+        
+        
+        (spit "filtered_purchases.edn" text)))
+     
+  
   
