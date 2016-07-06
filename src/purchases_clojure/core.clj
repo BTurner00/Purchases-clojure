@@ -19,11 +19,34 @@
 (defn purchases-html [purchases] 
   [:html
    [:body
+    [:a {:href "/"} "All"]
+    " "   
+    [:a {:href "/Furniture"} "Furniture"]
+    " " 
+    [:a {:href "/Alcohol"} "Alcohol"]
+    " " 
+    [:a {:href "/Toiletries"} "Toiletries"]
+    " " 
+    [:a {:href "/Shoes"} "Shoes"]
+    " " 
+    [:a {:href "/Food"} "Food"]
+    " " 
+    [:a {:href "/Jewelry"} "Jewelry"]
+    " " 
+
+    
     [:table 
      
-      (map (fn [purchase]
+     [:tr
+                [:th "Customer ID"]
+                [:th "Date"]
+                [:th "Credit Card #"]
+                [:th "CVV"]
+                [:th "Category"]]
+     
+      (map (fn [purchase]                                                     
              [:tr
-              [:td (:style "width:50%") (str(get purchase "customer_id"))]
+              [:td (str(get purchase "customer_id"))]
               [:td (str(get purchase "date"))]
               [:td (str(get purchase "credit_card"))]
               [:td (str(get purchase "cvv"))]
